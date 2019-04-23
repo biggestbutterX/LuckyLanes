@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="4">
+        <file>
+            <url>src/main/java/controllers/BowlerController.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>999</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/main/resources/view/bowler.fxml</url>
+            <bookmark id="4">
+                <name/>
+                <line>264</line>
+                <key/>
+            </bookmark>
+            <bookmark id="2">
+                <name/>
+                <line>413</line>
+                <key/>
+            </bookmark>
+            <bookmark id="3">
+                <name/>
+                <line>422</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/dugge/Documents/NetBeansProjects/LuckyLanes/LuckyLanes/src/main/java/controllers/LoginController.java</file>
+            <file>file:/C:/Users/dugge/Documents/NetBeansProjects/LuckyLanes/LuckyLanes/src/main/java/controllers/SearchController.java</file>
+            <file>file:/C:/Users/dugge/Documents/NetBeansProjects/LuckyLanes/LuckyLanes/src/main/java/controllers/BowlerController.java</file>
+        </group>
+    </open-files>
+</project-private>
