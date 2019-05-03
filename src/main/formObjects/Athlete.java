@@ -461,5 +461,7 @@ public class Athlete
                     + " WHERE ID = " + DBindex + ";";
            
             Database.executeUpdate(sql);
+        }
+    }
 }
 
