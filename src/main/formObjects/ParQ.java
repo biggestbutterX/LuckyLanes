@@ -37,14 +37,30 @@ public class ParQ {
      * It is used in conjunction with the other forms, since the value for 
      * each table is autoincremented. 
      */
-    public void addRow()
+    public void addRow(boolean viewInfo, int DBindex)
     {
-        String sql;
-            sql = "INSERT INTO PARQ VALUES ("
-                + "null,"
-                    + q1Ans + "," + q2Ans + "," + q3Ans + "," + q4Ans + "," + q5Ans + "," + q6Ans + "," +"'" + q7Ans +  "'" +");";
+	if(viewInfo == false){
+       	    String sql;
+            	sql = "INSERT INTO PARQ VALUES ("
+                	+ "null,"
+                    	+ q1Ans + "," + q2Ans + "," + q3Ans + "," + q4Ans + "," + q5Ans + "," + q6Ans + "," +"'" + q7Ans +  "'" +");";
             
         Database.executeUpdate(sql);
+	}
+	if(viewInfo == true){
+	    String sql;
+            	sql = "UPDATE PARQ SET"
+                    + " q1Ans = " + q1Ans + ","
+                    + " q2Ans = " + q2Ans + ","
+                    + " q3Ans = " + q3Ans + ","
+                    + " q4Ans = " + q4Ans + ","
+                    + " q5Ans = " + q5Ans + ","
+                    + " q6Ans = " + q6Ans + ","
+                    + " q7Ans = " + "'" + q7Ans + "'" 
+                    + " WHERE ID = " + DBindex + ";";
+            
+            Database.executeUpdate(sql);
+	}	
     }
     
     public String toHTML()
