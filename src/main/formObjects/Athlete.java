@@ -411,9 +411,10 @@ public class Athlete
      * It is used in conjunction with the other forms, since the value for 
      * each table is autoincremented. 
      */
-    public void addRow()
+    public void addRow(boolean viewInfo, int DBindex)
     {
-        String sql;
+        if(viewInfo == false){
+            String sql;
             sql = "INSERT INTO ATHLETE VALUES ("
                 + "null,"
                 + "'" + name + "'" + ","
@@ -437,5 +438,28 @@ public class Athlete
             
         Database.executeUpdate(sql);
     }
+    if(viewInfo == true){
+         String sql;
+            sql = "UPDATE ATHLETE SET" 
+                    + " name = " + "'" + name + "'" + ","
+                    + " date = " + "'" + date + "'" + ","
+                    + " dateOfBirth = " + "'" + dateOfBirth + "'" + ","
+                    + " address = " + "'" + address + "'" + ","
+                    + " city = " + "'" + city + "'" + ","
+                    + " state = " + "'" + state + "'" + ","
+                    + " zip = " + "'" + Integer.toString(zip) + "'" + ","
+                    + " phone = " + "'" + phone + "'" + ","
+                    + " school = " + "'" + school + "'" + ","
+                    + " height = " + "'" + Double.toString(height) + "'" + ","
+                    + " weight = " + "'" + Double.toString(weight) + "'" + ","
+                    + " age = " + "'" + Integer.toString(age) + "'" + ","
+                    + " gender = " + "'" + gender + "'" + ","
+                    + " handDominance = " + "'" + handDominance + "'" + ","
+                    + " legDominance = " + "'" + legDominance + "'" + ","
+                    + " primarySport = " + "'" + primarySport + "'" + ","
+                    + " primaryPosition = " + "'" + primaryPosition + "'"
+                    + " WHERE ID = " + DBindex + ";";
+           
+            Database.executeUpdate(sql);
 }
 
