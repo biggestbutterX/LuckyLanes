@@ -318,23 +318,54 @@ public class YBalance
      * It is used in conjunction with the other forms, since the value for 
      * each table is autoincremented. 
      */
-    public void addRow()
-    {
-        String sql;
+    public void addRow(boolean viewInfo, int DBindex) {
+        if (viewInfo == false) {
+            String sql;
             sql = "INSERT INTO YBALANCE VALUES ("
-                + "null,"
-                + rightLimbLength +","
-                    + antRightMean +","+antLeftMean +","
-                    + pmRightMean +","+pmLeftMean +","
-                    + plRightMean +","+plLeftMean +","
-                    + antR1 +","+antR2 +","+antR3 +","
-                    + antL1 +","+antL2 +","+antL3 +","
-                    + pmR1 +","+pmR2 +","+pmR3 +","
-                    + pmL1 +","+pmL2 +","+pmL3 +","
-                    + plR1 +","+plR2 +","+plR3 +","
-                    + plL1 +","+plL2 +","+plL3 +","
-                    + compositeLeft +","+compositeRight +");";
-            
-        Database.executeUpdate(sql);
+                    + "null,"
+                    + rightLimbLength + ","
+                    + antRightMean + "," + antLeftMean + ","
+                    + pmRightMean + "," + pmLeftMean + ","
+                    + plRightMean + "," + plLeftMean + ","
+                    + antR1 + "," + antR2 + "," + antR3 + ","
+                    + antL1 + "," + antL2 + "," + antL3 + ","
+                    + pmR1 + "," + pmR2 + "," + pmR3 + ","
+                    + pmL1 + "," + pmL2 + "," + pmL3 + ","
+                    + plR1 + "," + plR2 + "," + plR3 + ","
+                    + plL1 + "," + plL2 + "," + plL3 + ","
+                    + compositeLeft + "," + compositeRight + ");";
+
+            Database.executeUpdate(sql);
+        }
+        if(viewInfo == true){
+            String sql;
+            sql = "UPDATE YBALANCE SET"
+                    + " rightLimbLength = " + rightLimbLength + ","
+                    + " antRightMean = " + antRightMean + ","
+                    + " antLeftMean = " + antLeftMean + ","
+                    + " pmRightMean = " + pmRightMean + ","
+                    + " pmLeftMean = " + pmLeftMean + ","
+                    + " plRightMean = " + plRightMean + ","
+                    + " plLeftMean = " + plLeftMean + ","
+                    + " antR1 = " + antR1 + ","
+                    + " antR2 = " + antR2 + ","
+                    + " antR3 = " + antR3 + ","
+                    + " antL1 = " + antL1 + ","
+                    + " antL2 = " + antL2 + ","
+                    + " antL3 = " + antL3 + ","
+                    + " pmR1 = " + pmR1 + ","
+                    + " pmR2 = " + pmR2 + ","
+                    + " pmR3 = " + pmR3 + ","
+                    + " plR1 = " + plR1 + ","
+                    + " plR2 = " + plR2 + ","
+                    + " plR3 = " + plR3 + ","
+                    + " plL1 = " + plL1 + ","
+                    + " plL2 = " + plL2 + ","
+                    + " plL3 = " + plL3 + ","
+                    + " compositeLeft = " + compositeLeft + ","
+                    + " compositeRight = " + compositeRight 
+                    + " WHERE ID = " + DBindex + ";";
+            Database.executeUpdate(sql);
+        }
     }
 }
