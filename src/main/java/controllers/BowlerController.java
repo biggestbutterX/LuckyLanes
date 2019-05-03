@@ -2157,10 +2157,21 @@ public class BowlerController implements Initializable
     {
         //Try with a catch if you get exceptions.
         //Athlete temp = createAthlete();
-        //BIG BUG
+       
+        /* Bug Fix: March 2019
+        Author: Doug Molback
+            Makes a connection to the database to recieve the index of selected bowler. Index is passed to the 'addRow()' function
+            to dictate SQL UPDATE vs INSERT. This fixes the bug where editing a bowler would create a new entry rather than update
+            the existing one
+        */
         
-        System.out.println("Inside finishDataCollection in BowlerController.java");
-        
+        Database.connect();
+        ResultSet rs = Database.searchQuery("SELECT ID FROM athlete WHERE name = " + "'" + txfName.getText() + "'");
+        rs.absolute(1);
+        DBindex = rs.getInt(1);
+        System.out.println("INDEX = " + DBindex);
+        Database.close();
+       
         createAthlete();
         createFMS();
         createYBalance();
@@ -2171,7 +2182,7 @@ public class BowlerController implements Initializable
             createFitnessData(null);
         }
 
-        tmp.addRow();
+        tmp.addRow(viewInfo, DBindex);
         System.out.println("Inserted Objects to tables");
         setSuccessful(true);
 
@@ -2877,7 +2888,7 @@ public class BowlerController implements Initializable
                 age, gender, handDominance, legDominance, primarySport, primaryPosition);
 
         //Try with a catch if you get exceptions.
-        temp.addRow();
+        temp.addRow(viewInfo, DBindex);
 
         System.out.println("Created Athlete");
     }
@@ -2917,7 +2928,7 @@ public class BowlerController implements Initializable
                 txfTrunkStabilityComment.getText(), txfExtensionClearingComment.getText(),
                 txfRotaryComment.getText(), txfFlexionComment.getText());
 
-        temp.addRow();
+        temp.addRow(viewInfo, DBindex);
     }
 
     /**
@@ -2954,7 +2965,7 @@ public class BowlerController implements Initializable
         YBalance temp = new YBalance(rightLimbLength, antR1, antR2, antR3, antL1, antL2, antL3, pmR1, pmR2, pmR3,
                 pmL1, pmL2, pmL3, plR1, plR2, plR3, plL1, plL2, plL3);
 
-        temp.addRow();
+        temp.addRow(viewInfo, DBindex);
     }
     
     /**
@@ -3447,7 +3458,7 @@ public class BowlerController implements Initializable
                 kneeExtForceR2, kneeExtForceL1, kneeExtForceL2, jh1, jh2, medPass1, medPass2);
         tmp.setAerobicCapacity(vO2Max, postHR, postVO2Max, ageRating, rockHR, walkTime, rockVO2Max, walkDistance, walkVO2Max,
                 ACSMpercentile);
-        tmp.addRow();
+        tmp.addRow(viewInfo, DBindex);
     }
     
     /**
@@ -3534,7 +3545,7 @@ public class BowlerController implements Initializable
     	String q7Ans = txtParQuest7.getText();
     	
     	ParQ temp = new ParQ(q1Ans, q2Ans, q3Ans, q4Ans, q5Ans, q6Ans, q7Ans);
-    	temp.addRow();
+    	temp.addRow(viewInfo, DBindex);
     }
 
     /**
