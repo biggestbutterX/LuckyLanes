@@ -222,21 +222,85 @@ public class FitnessTest
      * It is used in conjunction with the other forms, since the value for 
      * each table is autoincremented. 
      */
-    public void addRow()
-    {
-        String sql;
+    public void addRow(boolean viewInfo, int DBindex) {
+        if (viewInfo == false) {
+            String sql;
             sql = "INSERT INTO FITNESSDATA VALUES ("
-                + "null,"
-                + age + "," + restingHR + "," + restingHR1 + "," + restingHR2 + "," + height + "," + bodyWeight + "," + bmi + ","
-                + peakFlow + ",'" + gender + "'," + ant1 + "," + ant2 + "," + antAvg + "," + waistCirc + "," + hipCirc + "," + midThighCirc
-                + "," + flexArmCirc + "," + hamCSA + "," +quadCSA + "," + totalThighCSA + "," + biCirc + "," + triSkin + "," + subSkin + "," 
-                + abdSkin + "," + supSkin + "," + thighSkin + "," + pecSkin + "," + wallsit + ", "+ startDist + "," + endDist1 + ","
-                + endDist2 + "," + endDist3 + "," + finalDist + "," + hgR1 + "," + hgR2 + "," + hgR3 + "," + hgL1 + "," + hgL2 + ","
-                + hgL3 + "," + proneTime + "," + kneeExtForceR1 + "," + kneeExtForceR2 + "," + kneeExtForceL1 + "," + kneeExtForceL2 + ","
-                + jh1 + "," + jh2 + "," + medPass1 + "," + medPass2 + "," + vO2Max + "," + postVO2Max + "," + ageRating + "," + postHR
-                + "," + walkTime + "," + rockVO2Max + "," + rockHR + "," + walkDistance + "," + walkVO2Max + "," + ACSMpercentile+ ");";
+                    + "null,"
+                    + age + "," + restingHR + "," + restingHR1 + "," + restingHR2 + "," + height + "," + bodyWeight + "," + bmi + ","
+                    + peakFlow + ",'" + gender + "'," + ant1 + "," + ant2 + "," + antAvg + "," + waistCirc + "," + hipCirc + "," + midThighCirc
+                    + "," + flexArmCirc + "," + hamCSA + "," + quadCSA + "," + totalThighCSA + "," + biCirc + "," + triSkin + "," + subSkin + ","
+                    + abdSkin + "," + supSkin + "," + thighSkin + "," + pecSkin + "," + wallsit + ", " + startDist + "," + endDist1 + ","
+                    + endDist2 + "," + endDist3 + "," + finalDist + "," + hgR1 + "," + hgR2 + "," + hgR3 + "," + hgL1 + "," + hgL2 + ","
+                    + hgL3 + "," + proneTime + "," + kneeExtForceR1 + "," + kneeExtForceR2 + "," + kneeExtForceL1 + "," + kneeExtForceL2 + ","
+                    + jh1 + "," + jh2 + "," + medPass1 + "," + medPass2 + "," + vO2Max + "," + postVO2Max + "," + ageRating + "," + postHR
+                    + "," + walkTime + "," + rockVO2Max + "," + rockHR + "," + walkDistance + "," + walkVO2Max + "," + ACSMpercentile + ");";
             
-        Database.executeUpdate(sql);
+            Database.executeUpdate(sql);
+        }
+        if(viewInfo == true){
+            String sql;
+            sql = "UPDATE FITNESSDATA SET"
+                    + " age = " + age + ","
+                    + " restingHR = " + restingHR + ","
+                    + " restingHR1 = " + restingHR1 + ","
+                    + " restingHR2 = " + restingHR2 + ","
+                    + " height = " + height + ","
+                    + " bodyWeight = " + bodyWeight + ","
+                    + " bmi = " + bmi + ","
+                    + " peakFlow = " + peakFlow + ","
+                    + " gender = " + "'" + gender + "'" + ","
+                    + " ant1 = " + ant1 + ","
+                    + " ant2 = " + ant2 + ","
+                    + " antAvg = " + antAvg + ","
+                    + " waistCirc = " + waistCirc + ","
+                    + " hipCirc = " + hipCirc + ","
+                    + " midThighCirc = " + midThighCirc + ","  
+                    + " flexArmCirc = " + flexArmCirc + ","
+                    + " hamCSA = " + hamCSA + ","
+                    + " quadCSA = " + quadCSA+ ","
+                    + " totalThighCSA = " + totalThighCSA + ","
+                    + " biCirc = " + biCirc + ","
+                    + " triSkin = " + triSkin + ","
+                    + " subSkin = " + subSkin + ","
+                    + " abdSkin = " + abdSkin + ","
+                    + " supSkin = " + supSkin + ","
+                    + " thighSkin = " + thighSkin + ","
+                    + " pecSkin = " + pecSkin + ","
+                    + " wallsit = " + wallsit + ","
+                    + " startDist = " + startDist + "," 
+                    + " endDist1 = " + endDist1 + ","
+                    + " endDist2 = " + endDist2 + "," 
+                    + " endDist2 = " + endDist3 + "," 
+                    + " finalDist = " + finalDist + "," 
+                    + " hgR1 = " + hgR1 + "," 
+                    + " hgR2 = " + hgR2 + "," 
+                    + " hgR3 = " + hgR3 + "," 
+                    + " hgL1 = " + hgL1 + "," 
+                    + " hgL2 = " + hgL2 + ","
+                    + " hgL3 = " + hgL3 + "," 
+                    + " proneTime = " + proneTime + "," 
+                    + " kneeExtForceR1 = " + kneeExtForceR1 + "," 
+                    + " kneeExtForceR2 = " + kneeExtForceR2 + "," 
+                    + " kneeExtForceL1 = " + kneeExtForceL1 + "," 
+                    + " kneeExtFroceL2 = " + kneeExtForceL2 + ","
+                    + " jh1 = " + jh1 + "," 
+                    + " jh2 = " + jh2 + "," 
+                    + " medPass1 = " + medPass1 + "," 
+                    + " medPass2 = " + medPass2 + "," 
+                    + " vO2Max = " + vO2Max + ","
+                    + " postVO2Max = " + postVO2Max + ","
+                    + " ageRating = " + ageRating + ","
+                    + " postHR = " + postHR + ","
+                    + " walkTime = " + walkTime + ","
+                    + " rockVO2Max = " + rockVO2Max + ","
+                    + " rockHR = " + rockHR + ","
+                    + " walkDistance = " + walkDistance + ","
+                    + " walkVO2Max = " + walkVO2Max + ","
+                    + " ACSMpercentile = " + ACSMpercentile + ";";
+            
+            Database.executeUpdate(sql);
+        }
     }
 
     /**
