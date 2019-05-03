@@ -139,23 +139,55 @@ public class FMS
      * It is used in conjunction with the other forms, since the value for 
      * each table is autoincremented. 
      */
-    public void addRow()
-    {
-        String sql;
+   public void addRow(boolean viewInfo, int DBindex) {
+        if (viewInfo == false) {
+            String sql;
             sql = "INSERT INTO FMS VALUES ("
-                + "null,"
-                    + deepSquatRaw+","+ deepSquatFinal+","
-                    + hurdleStepRawL+","+ hurdleStepRawR+","+ hurdleStepFinal+","
-                    + inlineLoungeRawL+","+ inlineLoungeRawR+","+ inlineLoungeFinal+","
-                    + shoulderMobilityRawL+","+ shoulderMobilityRawR+","+ shoulderMobilityFinal+","
-                    + shoulderClearingL+","+ shoulderClearingR+","
-                    + legRaiseRawL+","+ legRaiseRawR+","+ legRaiseFinal+","
-                    + trunkStabilityRaw+","+ trunkStabilityFinal+","
-                    + extensionClearing+","
-                    + rotaryRawL+","+ rotaryRawR+","+ rotaryFinal+","
-                    + flexionClearing+","+total+");";
+                    + "null,"
+                    + deepSquatRaw + "," + deepSquatFinal + ","
+                    + hurdleStepRawL + "," + hurdleStepRawR + "," + hurdleStepFinal + ","
+                    + inlineLoungeRawL + "," + inlineLoungeRawR + "," + inlineLoungeFinal + ","
+                    + shoulderMobilityRawL + "," + shoulderMobilityRawR + "," + shoulderMobilityFinal + ","
+                    + shoulderClearingL + "," + shoulderClearingR + ","
+                    + legRaiseRawL + "," + legRaiseRawR + "," + legRaiseFinal + ","
+                    + trunkStabilityRaw + "," + trunkStabilityFinal + ","
+                    + extensionClearing + ","
+                    + rotaryRawL + "," + rotaryRawR + "," + rotaryFinal + ","
+                    + flexionClearing + "," + total + ");";
+
+            Database.executeUpdate(sql);
+        }
+        if(viewInfo == true){
+            String sql;
+            sql = "UPDATE FMS SET"
+                    + " deepSquatRaw = " + deepSquatRaw + ","
+                    + " deepSquatFinal = " + deepSquatFinal + ","
+                    + " hurdleStepRawL = " + hurdleStepRawL + ","
+                    + " hurdleStepRawR = " + hurdleStepRawR + ","
+                    + " hurdleStepFinal = " + hurdleStepFinal + ","
+                    + " inlineLoungeRawL = " + inlineLoungeRawL + ","
+                    + " inlineLoungeRawR = " + inlineLoungeRawR + ","
+                    + " inlineLoungeFinal = " + inlineLoungeFinal + ","
+                    + " shoulderMobilityRawL = " + shoulderMobilityRawL + ","
+                    + " shoulderMobilityRawR = " + shoulderMobilityRawR + ","
+                    + " shoulderMobilityFinal = " + shoulderMobilityFinal + ","
+                    + " shoulderClearingL = " + shoulderClearingL + ","
+                    + " shoulderClearingR = " + shoulderClearingR + ","
+                    + " legRaiseRawL = " + legRaiseRawL + ","
+                    + " legRaiseRawR = " + legRaiseRawR + ","
+                    + " legRaiseFinal = " + legRaiseFinal + ","
+                    + " trunkStabilityRaw = " + trunkStabilityRaw + ","
+                    + " trunkStabilityFinal = " + trunkStabilityFinal + ","
+                    + " extensionClearing = " + extensionClearing + ","
+                    + " rotaryRawL = " + rotaryRawL + ","
+                    + " rotaryRawR = " + rotaryRawR + ","
+                    + " rotaryFinal = " + rotaryFinal + ","
+                    + " flexionClearing = " + flexionClearing + ","
+                    + " total = " + rotaryRawL 
+                    + " WHERE ID = " + DBindex + ";";
             
-        Database.executeUpdate(sql);
+            Database.executeUpdate(sql);
+        }
     }
     
     /**
