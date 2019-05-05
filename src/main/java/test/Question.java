@@ -12,10 +12,10 @@ package main.java.test;
 public class Question {
     
     private Option[] options = new Option[4];
+    private int answer = 0;
     private String Question;
     
-    public Question(Option [] options, String Question){
-        this.options = options;
+    public Question(String Question){
         this.Question = Question;
     }
     
@@ -31,6 +31,17 @@ public class Question {
         if(option != null){
             return option.writeToDB();
         }
+        return false;
+    }
+    
+    public boolean addQuestionToDB(){
+        //add question and options to database with correct answer
+        // int auto_increment index, string Question, string option1, string option2, string option3, string option4, int answer 
+        String[] optionsText = new String[options.length];
+        for(int i = 0; i < options.length; i++){
+            optionsText[i] = options[i].getText();
+        }  
+        
         return false;
     }
     /*
@@ -91,6 +102,14 @@ public class Question {
 
     public void setQuestion(String Question) {
         this.Question = Question;
+    }
+    
+    public void setAnswer(int answer){
+        this.answer = answer;
+    }
+    
+    public int getAnswer(){
+        return answer;
     }
  
     
