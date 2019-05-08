@@ -1,5 +1,4 @@
 
-
 package main.java;
 
 import main.java.controllers.LoginController;
@@ -189,6 +188,7 @@ public class LuckyLanes extends Application
      */
     public static void main(String[] args)
     {
+        Database.createDatabase("~/LuckyLanes");
         launch(args);
     }
 
@@ -204,3 +204,6 @@ public class LuckyLanes extends Application
         // Save file
     }
 }
+
+
+
