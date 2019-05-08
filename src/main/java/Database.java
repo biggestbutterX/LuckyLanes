@@ -220,6 +220,27 @@ public class Database
             
             state.execute(sql);
             System.out.println("Created Par-Q table");
+            
+            sql = "CREATE TABLE IQPSYCH (ID INT PRIMARY KEY AUTO_INCREMENT, "
+                    + "IQ double, Psych VARCHAR(255));";
+                    
+                    state.execute(sql);
+            System.out.println("Created a IQ AND Psych Test table");
+            
+            sql = "CREATE TABLE TEST (ID INT PRIMARY KEY AUTO_INCREMENT, "
+                    + "QuestionId INT);";
+                    
+                    state.execute(sql);
+            System.out.println("Created TEST table");
+            
+            
+            sql = "CREATE TABLE QUESTION (ID INT PRIMARY KEY AUTO_INCREMENT, "
+                    + "Question VARCHAR(255), Option1 VARCHAR(255), Option1Value boolean,"
+                    +"Option2 VARCHAR(255), Option2Value boolean, Option3 VARCHAR(255), Option3Value boolean, Option4 VARCHAR(255), Option4Value boolean);";
+                    
+                    state.execute(sql);
+            System.out.println("Created a Question table");
+            
 
             /*more Nicoles muahahah
             for (int i = 0; i < 10000; i++)
@@ -411,3 +432,7 @@ public class Database
         return url;
     }
 }
+
+
+
+
