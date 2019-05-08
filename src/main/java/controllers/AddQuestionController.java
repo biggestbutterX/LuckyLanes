@@ -26,9 +26,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import main.java.Database;
 import main.java.LuckyLanes;
 import main.java.scene.control.TextFieldRequired;
-import main.java.test.Question;
 
 /**
  * FXML Controller class
@@ -100,22 +100,37 @@ public class AddQuestionController implements Initializable
      * @param event 
      */
     //open up forms. Takes file path to form
+    
     @FXML
     private void questionToAdd(ActionEvent event)
     {
-        Question question = new Question(mainQuestion.getText());
-        question.createOption(option1.getText());
-        question.createOption(option2.getText());
-        question.createOption(option3.getText());
-        question.createOption(option4.getText());
+        //Option option1Obj = new Option(option1.getText(), option1Value.isSelected());
+        //Option option2Obj = new Option(option2.getText(), option2Value.isSelected());
+        //Option option3Obj = new Option(option3.getText(), option3Value.isSelected());
+        //Option option4Obj = new Option(option4.getText(), option4Value.isSelected());
+        //Question questionObj = new Question(option1Obj, option2Obj, option3Obj, option4Obj);
         
-        if(option1Value.isSelected()) question.setAnswer(0);
-        else if(option2Value.isSelected()) question.setAnswer(1);
-        else if(option3Value.isSelected()) question.setAnswer(2);
-        else if(option4Value.isSelected()) question.setAnswer(3);
+        //questionObj.saveToDataBase();
         
-        question.writeToDB();
-        //goBack();
+        String sql = "INSERT INTO QUESTION VALUES (null,"
+                + "'" + mainQuestion.getText() + "'" + ","
+                + "'" + option1.getText() + "'" + ","
+                + "'" + option1Value.isSelected() + "'" + ","
+                + "'" + option2.getText() + "'" + ","
+                + "'" + option2Value.isSelected() + "'" + ","
+                + "'" + option3.getText() + "'" + ","
+                + "'" + option3Value.isSelected() + "'" + ","
+                + "'" + option4.getText() + "'" + ","
+                + "'" + option4Value.isSelected() + "'" + ");";
+        System.out.println(sql);
+                Database.executeUpdate(sql);
+                
+        try{
+            goBack();
+        }catch(Exception e){
+            System.out.print("failed");
+        }
+        
         
     }
     @FXML
@@ -143,59 +158,3 @@ public class AddQuestionController implements Initializable
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
