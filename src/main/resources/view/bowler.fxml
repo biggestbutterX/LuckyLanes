@@ -2404,12 +2404,7 @@
                                 </ScrollPane>
                             </content>
                         </Tab>
-                        <Tab fx:id = "Psych" text = "Psych. Test">
                         
-                        </Tab>
-                        <Tab fx:id = "testBowl" text = "Bowling Test">
-                            
-                        </Tab>
                     </tabs>
                 </TabPane>
                 <AnchorPane layoutY="547.0" prefHeight="53.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -2433,5 +2428,8 @@
         </AnchorPane>
     </center>
 </BorderPane>
+
+
+
 
 
