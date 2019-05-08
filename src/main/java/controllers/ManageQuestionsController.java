@@ -154,9 +154,9 @@ public class ManageQuestionsController implements Initializable
             stage.setScene(new Scene(root));
             stage.show();
 
-            /*UpdateQuestionController newAthlete = (UpdateQuestionController) ((Initializable) loader.getController());
+            UpdateQuestionController newAthlete = (UpdateQuestionController) ((Initializable) loader.getController());
             newAthlete.setStage(stage);
-            newAthlete.setPreScene(preScene);*/
+            newAthlete.setPreScene(preScene);
 
             stage.setOnCloseRequest((WindowEvent we) ->
             {

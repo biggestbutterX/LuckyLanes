@@ -45,50 +45,33 @@ import main.java.Database;
 import main.java.LuckyLanes;
 import main.java.Report;
 
+
 /**
  * FXML Controller class
  *
- * @author nicolenelson
+ * This is the controller for the creation of an athlete. It gives the user
+ * the option to choose between a list of specific athletes.
+ * 
+ * @author Mario
  */
-public class SearchController implements Initializable
+public class UpdateQuestionController implements Initializable
 {
-    // variables from the fxml file
     @FXML
     TableView table;
     @FXML
-    TextField txtName;
-    @FXML
-    TextField txtAddress;
-    @FXML
-    TextField txtState;
-    @FXML
-    TextField txtCity;
-    @FXML
-    TextField txtSchool;
-    @FXML
-    TextField txtSport;
-    @FXML
-    TextField txtZip;
-    @FXML
-    TextField txtID;
-    @FXML
-    Button buttonSubmit;
-    @FXML
     ProgressIndicator progressIndicator;
-    
-    // variables for sql/database
-    private ObservableList<ObservableList> data;
     private Executor exec;
-    private ResultSet rs;
-    private Report report;
-    
-    private Stage stage;                //Used to allow the user to go back to the previous scene. Otherwise not used.
+    private ObservableList<ObservableList> data;
+    private Stage stage;                //The window.
     
     private Scene preScene;             //The previous screens scene while using the back button.
+    private Scene nextScene;            //The to be next scene.
     private double preMinHeight;        //The previous minimum screens height.
     private double preMinWidth;         //The previous minimum screens width.
+    
     private String preTitle;            //The previous screens title.
-
+    protected final String title = "Update Questions";       //The current stages title.
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -97,6 +80,7 @@ public class SearchController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+          {
         // TODO
         
         exec = Executors.newCachedThreadPool(runnable ->
@@ -109,171 +93,32 @@ public class SearchController implements Initializable
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         buildData();
     }
-
-    /**
-     *
-     * @param e
-     */
-    @FXML
-    public void printAllReport(ActionEvent e)
-    {
-        if (table.getItems().size() == 0)
-        {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error Saving reports");
-            alert.setHeaderText("There are no reports to save");
-            alert.setContentText("Search for reports and try again.");
-            
-            alert.showAndWait();
-        }
-        else
-        {
-            Report p = new Report();
-
-            for (Object item : table.getItems())
-            {
-                ObservableList<String> row = (ObservableList<String>) item;
-                p.addID(Integer.parseInt(row.get(0)));
-            }
-
-            Task<Void> print = new Task<Void>()
-            {
-                
-                /**
-                 * 
-                 * @return
-                 * @throws Exception 
-                 */
-                @Override
-                public Void call() throws Exception
-                {
-                    progressIndicator.setVisible(true);//FUCK YES!!!!
-                    System.out.println("Creating Objets to save");
-                    p.createObjects();
-                    p.toDocs();
-                    return null;
-                }
-            };
-            
-            progressIndicator.progressProperty().bind(print.progressProperty());
-            progressIndicator.setStyle(" -fx-progress-color: green;");
-
-            progressIndicator.setOnMouseClicked(new EventHandler<MouseEvent>()
-            {
-                
-                /**
-                 * 
-                 * @param arg0 
-                 */
-                @Override
-                public void handle(MouseEvent arg0)
-                {
-                    if (progressIndicator.getProgress() == 1)
-                    {
-                        progressIndicator.setVisible(false);
-                    }
-                }
-            });
-            
-            print.setOnSucceeded(error ->
-            {
-                //this.rs=databaseQuery.getValue();
-                
-                System.out.println("It's Alive!!!");
-                progressIndicator.progressProperty().unbind();
-                progressIndicator.setProgress(1);
-            });
-
-            exec.execute(print);
-        }
     }
-
+    
     /**
-     *
-     * @param e
+     * Puts things in the current window. Changes the scene to the current one.
+     * @param stage The window.
      */
-    @FXML
-    public void printSelectedReport(ActionEvent e)
+    protected void setStage(Stage stage)
     {
-        if (table.getSelectionModel().getSelectedItems().isEmpty())
-        {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error Saving reports");
-            alert.setHeaderText("There are no selected reports.");
-            alert.setContentText("Select at least one report and try again");
-
-            alert.showAndWait();
-        }
-        else
-        {
-            Report p = new Report();
-
-            for (Object item : table.getSelectionModel().getSelectedItems())
-            {
-                ObservableList<String> row = (ObservableList<String>) item;
-                p.addID(Integer.parseInt(row.get(0)));
-            }
-
-            Task<Void> print = new Task<Void>()
-            {
-                
-                /**
-                 * 
-                 * @return
-                 * @throws Exception 
-                 */
-                @Override
-                public Void call() throws Exception
-                {
-                    progressIndicator.setVisible(true);//FUCK YES!!!!
-                    System.out.println("Creating Objets to save");
-                    p.createObjects();
-                    p.toDocs();
-                    
-                    return null;
-                }
-            };
-            
-            progressIndicator.progressProperty().bind(print.progressProperty());
-            progressIndicator.setStyle(" -fx-progress-color: green;");
-
-            progressIndicator.setOnMouseClicked(new EventHandler<MouseEvent>()
-            {
-                
-                /**
-                 * 
-                 * @param arg0 
-                 */
-                @Override
-                public void handle(MouseEvent arg0)
-                {
-                    if (progressIndicator.getProgress() == 1)
-                    {
-                        progressIndicator.setVisible(false);
-                    }
-                }
-            });
-            print.setOnSucceeded(error ->
-            {
-                //this.rs=databaseQuery.getValue();
-                
-                System.out.println("It's Alive!!!");
-                progressIndicator.progressProperty().unbind();
-                progressIndicator.setProgress(1);
-            });
-
-            exec.execute(print);
-        }
+        preTitle = stage.getTitle();
+        this.stage = stage;
+        this.stage.setTitle(title);
+        
+        preMinHeight = stage.getMinHeight();
+        preMinWidth = stage.getMinWidth();
+        
+        stage.setMinHeight(stage.getHeight());
+        stage.setMinWidth(stage.getWidth());
     }
-
+    
     /**
-     *
-     * Does it need a parameter?
-     * Action Events can only be created by event handlers tied to ui elements
-     * @param e
+     * 
+     * @param event 
      */
+    //open up forms. Takes file path to form
     @FXML
-    public void buildData(/*ActionEvent e*/)
+  public void buildData(/*ActionEvent e*/)
     {
         //table.getItems().clear();
         
@@ -282,15 +127,7 @@ public class SearchController implements Initializable
         System.out.println("Running");
         
         // prepare SQL statement
-        String SQL = "SELECT ID,name, address, school,age, gender FROM athlete WHERE "
-                + "(UPPER(name) LIKE UPPER('%" + txtName.getText() + "%') or name is null) "
-                + "and (UPPER(address) LIKE UPPER('%" + txtAddress.getText() + "%') or address is null) "
-                + "and (UPPER(state) LIKE UPPER('%" + txtState.getText() + "%') or state is null) "
-                + "and (UPPER(city) LIKE UPPER('%" + txtCity.getText() + "%') or city is null) "
-                + "and (zip LIKE ('%" + txtZip.getText() + "%') or zip is null) "
-                + "and (UPPER(school) LIKE UPPER('%" + txtSchool.getText() + "%') or school is null) "
-                + "and (UPPER(primarysport) LIKE UPPER('%" + txtSport.getText() + "%') or primarysport is null) "
-                + "and (ID LIKE ('%" + txtID.getText() + "') or ID is null) "; // data to grab
+         String SQL = "SELECT ID, Question FROM QUESTION";
 
         // grab the result set of the equation
         //ResultSet rs = Database.searchQuery(SQL);
@@ -298,11 +135,7 @@ public class SearchController implements Initializable
         Task<Void> databaseQuery = new Task<Void>()
         {
             
-            /**
-             * 
-             * @return
-             * @throws Exception 
-             */
+           
             @Override
             public Void call() throws Exception
             {
@@ -335,7 +168,7 @@ public class SearchController implements Initializable
                                 final int j = i;
                                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
                                 
-                                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList, String>, ObservableValue<String>>()
+                                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>()
                                 {
                                     
                                     /**
@@ -344,7 +177,7 @@ public class SearchController implements Initializable
                                      * @return 
                                      */
                                     @Override
-                                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param)
+                                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param)
                                     {
                                         return new SimpleStringProperty(param.getValue().get(j).toString());
                                     }
@@ -380,7 +213,7 @@ public class SearchController implements Initializable
                              * Create Separate column to insert a button for each record to view more information
                              * @author JacobMatuszak
                              */
-                            TableColumn editCol = new TableColumn("View/Edit");
+                            TableColumn editCol = new TableColumn("View/Edit/Delete");
                             editCol.setStyle("-fx-alignment: CENTER;");
                             
                             // Create a new cellFactory to allow buttons to be created in a column
@@ -397,7 +230,7 @@ public class SearchController implements Initializable
                             				// Creates an action to open a new instance of the BowlerController with inserted Values
                             				EventHandler<ActionEvent> open = e -> {
                             					ObservableList<String> tempID = getTableView().getItems().get(getIndex());
-                            					editAthlete(tempID.get(0));
+                            					editQuestion(tempID.get(0));
                             				};
                             				btn.setOnAction(open);
                             			}
@@ -461,11 +294,8 @@ public class SearchController implements Initializable
         // start converting the result set into tableview
         exec.execute(databaseQuery);
     }
-    
-    private void editAthlete(String id)
-    {
-        
-        String fxml = "/main/resources/view/AthleteMenu.fxml";
+    public void editQuestion(String id){
+        String fxml = "/main/resources/view/EditQuestions.fxml";
         
         AnchorPane root;
         try
@@ -485,16 +315,15 @@ public class SearchController implements Initializable
                 in.close();
             }
         
-            Stage stage = new Stage();
-            //preScene = stage.getScene();
+            //Stage stage = new Stage();
+            preScene = stage.getScene();
             stage.setScene(new Scene(root));
             stage.show();
 
-            AthleteMenuController newAthlete = (AthleteMenuController) ((Initializable) loader.getController());
-            newAthlete.setId(id);
+            EditQuestionsController newAthlete = (EditQuestionsController) ((Initializable) loader.getController());
+            newAthlete.setFromRecord(id);
             newAthlete.setStage(stage);
             newAthlete.setPreScene(preScene);
-            
 
             stage.setOnCloseRequest((WindowEvent we) ->
             {
@@ -511,30 +340,9 @@ public class SearchController implements Initializable
         }
     }
     @FXML
-    
-    /**
-     * Adds the previous scene into the object to allow the user to go back to it with the back button.
-     * @param pre The previous scene.
-     */
     protected void setPreScene(Scene pre)
     {
         preScene = pre;
-    }
-    
-    /**
-     * Sets the stage object with data so the back button can change the scene to go back.
-     * @param stage The window.
-     */
-    protected void setStage(Stage stage, String title)
-    {
-        preTitle = title;
-        this.stage = stage;
-        
-        preMinHeight = stage.getMinHeight();
-        preMinWidth = stage.getMinWidth();
-
-        stage.setMinHeight(stage.getHeight());
-        stage.setMinWidth(stage.getWidth());
     }
     
     /**
@@ -545,13 +353,70 @@ public class SearchController implements Initializable
     @FXML
     private void goBack() throws IOException
     {
-        stage.setMinHeight(preMinHeight);
-        stage.setMinWidth(preMinWidth);
-        stage.setScene(preScene);
-        stage.sizeToScene();
-        stage.setTitle(preTitle);
+        
+        stage.close();
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
