@@ -63,7 +63,7 @@ public class AdminController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Trace.createFile();
+        Trace.createFile();    
     }
     
     /**
@@ -215,6 +215,100 @@ public class AdminController implements Initializable
      * It creates a new stage to display the form to add new athletes.
      * @param event 
      */
+      //show forms
+    @FXML
+    private void manageQuestions(ActionEvent event)
+   {
+        String fxml = "/main/resources/view/ManageQuestions.fxml";
+        
+        AnchorPane root;
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            InputStream in = LuckyLanes.class.getResourceAsStream(fxml);
+
+            loader.setBuilderFactory(new JavaFXBuilderFactory());
+            loader.setLocation(LuckyLanes.class.getResource(fxml));
+
+            try
+            {
+                root = (AnchorPane) loader.load(in);
+            }
+            finally
+            {
+                in.close();
+            }
+        
+            //Stage stage = new Stage();
+            preScene = stage.getScene();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            ManageQuestionsController newAthlete = (ManageQuestionsController) ((Initializable) loader.getController());
+            newAthlete.setStage(stage);
+            newAthlete.setPreScene(preScene);
+
+            stage.setOnCloseRequest((WindowEvent we) ->
+            {
+                //((OLD)) ((Stage) (((Node) (event.getSource())).getScene().getWindow())).show(); ((OLD))
+                ((Stage) (stage.getScene()).getWindow()).show();
+            });
+            
+            // ((OLD))  Hide this current window (if this is what you want)          ((OLD))
+            // ((OLD))  ((Node) (event.getSource())).getScene().getWindow().hide();  ((OLD))
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    //show forms
+    private void showForms(ActionEvent event)
+   {
+        String fxml = "/main/resources/view/showForms.fxml";
+        
+        AnchorPane root;
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            InputStream in = LuckyLanes.class.getResourceAsStream(fxml);
+
+            loader.setBuilderFactory(new JavaFXBuilderFactory());
+            loader.setLocation(LuckyLanes.class.getResource(fxml));
+
+            try
+            {
+                root = (AnchorPane) loader.load(in);
+            }
+            finally
+            {
+                in.close();
+            }
+        
+            //Stage stage = new Stage();
+            preScene = stage.getScene();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            ShowFormsController newAthlete = (ShowFormsController) ((Initializable) loader.getController());
+            newAthlete.setStage(stage);
+            newAthlete.setPreScene(preScene);
+
+            stage.setOnCloseRequest((WindowEvent we) ->
+            {
+                //((OLD)) ((Stage) (((Node) (event.getSource())).getScene().getWindow())).show(); ((OLD))
+                ((Stage) (stage.getScene()).getWindow()).show();
+            });
+            
+            // ((OLD))  Hide this current window (if this is what you want)          ((OLD))
+            // ((OLD))  ((Node) (event.getSource())).getScene().getWindow().hide();  ((OLD))
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void showNewAthlete(ActionEvent event)
     {
@@ -333,3 +427,16 @@ public class AdminController implements Initializable
         stage.close();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
