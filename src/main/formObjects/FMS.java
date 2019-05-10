@@ -227,5 +227,15 @@ public class FMS
         
         return html;
     }
+    
+    public String toPDF(){
+        String pdf = "Functional Movement Screen|"+deepSquatRaw+"|"+deepSquatFinal+"|"+deepSquatComment+"|"+hurdleStepRawL+"|"+hurdleStepFinal
+                +"|"+hurdleStepComment+"|"+hurdleStepRawR+"|"+inlineLoungeRawL+"|"+inlineLoungeFinal+"|"+inlineLoungeComment+"|"+inlineLoungeRawR
+                +"|"+shoulderMobilityRawL+"|"+shoulderMobilityFinal+"|"+shoulderMobilityComment+"|"+shoulderMobilityRawR+"|"+shoulderClearingL
+                +"|"+shoulderClearingComment+"|"+shoulderClearingR+"|"+legRaiseRawL+"|"+legRaiseFinal+"|"+legRaiseComment+"|"+legRaiseRawR+"|"
+                +trunkStabilityRaw+"|"+trunkStabilityFinal+"|"+trunkStabilityComment+"|"+extensionClearing+"|"+extensionClearingComment+"|"
+                +rotaryRawL+"|"+rotaryFinal+"|"+rotaryComment+"|"+rotaryRawR+"|"+flexionClearing+"|"+flexionComment+"|"+total;
+        return pdf;
+    }
 
 }
