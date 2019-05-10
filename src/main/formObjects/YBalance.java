@@ -123,6 +123,14 @@ public class YBalance
         return html;
     }
 
+    public String toPDF(){
+        String pdf = "Y-Balance|"+this.pmL1+"|"+this.pmL2+"|"+this.pmL3+"|"+this.pmR1+"|"+this.pmR2+"|"+this.pmR3+"|"+this.plL1+"|"
+                +this.plL2+"|"+this.plL3+"|"+this.plR1+"|"+this.plR2+"|"+this.plR3+"|"+this.antL1+"|"+this.antL2+"|"+this.antL3+"|"
+                +this.antR1+"|"+this.antR2+"|"+this.antR3+"|"+this.rightLimbLength+"|"+this.antRightMean+"|"+this.antLeftMean+"|"
+                +this.pmLeftMean+"|"+this.pmRightMean+"|"+this.plLeftMean+"|"+this.plRightMean;
+        return pdf;
+    }
+    
     /**
      * Empty constructor
      */
