@@ -80,5 +80,11 @@ public class ParQ {
                 
         return html;
     }
+	
+    public String toPDF(){
+        System.out.println(this.q2Ans);
+        String pdf = "ParQ"+"|"+this.q1Ans+"|"+this.q2Ans+"|"+this.q3Ans+"|"+this.q4Ans+"|"+this.q5Ans+"|"+this.q6Ans+"|"+this.q7Ans;
+        return pdf;
+    }
 
 }
