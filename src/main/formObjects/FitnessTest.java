@@ -383,6 +383,18 @@ public class FitnessTest
         return html;
     }
 
+    public String toPDF(){
+        String pdf = "FitenessTest|"+this.age+"|"+restingHR1+"|"+this.restingHR1+"|"+this.restingHR2+"|"+this.height+"|"+this.bodyWeight+"|"
+		+this.bmi+"|"+this.peakFlow+"|"+this.ant1+"|"+this.ant2+"|"+this.antAvg+"|"+this.waistCirc+"|"+this.hipCirc+"|"+this.midThighCirc
+		+"|"+this.flexArmCirc+"|"+this.hamCSA+"|"+this.quadCSA+"|"+this.totalThighCSA+"|"+this.biCirc+"|"+this.triSkin+"|"+this.subSkin+"|"
+		+this.abdSkin+"|"+this.subSkin+"|"+this.thighSkin+"|"+this.pecSkin+"|"+this.wallsit+"|"+this.startDist+"|"+this.endDist1+"|"
+		+this.endDist2+"|"+this.endDist3+"|"+this.finalDist+"|"+this.hgR1+"|"+this.hgR2+"|"+this.hgR3+"|"+this.hgL1+"|"+this.hgL2+"|"+this.hgL3
+		+"|"+this.proneTime+"|"+this.kneeExtForceR1+"|"+this.kneeExtForceR2+"|"+this.kneeExtForceL1+"|"+this.kneeExtForceL2+"|"+this.jh1+"|"
+		+this.jh2+"|"+this.medPass1+"|"+this.medPass2+"|"+this.vO2Max+"|"+this.postHR+"|"+this.postVO2Max+"|"+this.ageRating+"|"+this.rockHR+"|"
+		+this.walkTime+"|"+this.rockVO2Max+"|"+this.walkDistance+"|"+this.walkVO2Max+"|"+this.ACSMpercentile;
+        return pdf;
+    }
+
     /***
      * gets/sets each individual variable. 
      * @return 
