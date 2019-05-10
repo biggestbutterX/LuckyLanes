@@ -61,6 +61,12 @@ public class Athlete
      return html;
     }
  
+    public String toPDF(){
+        String pdf = "Athlete|"+this.name+"|"+this.date+"|"+this.dateOfBirth+"|"+this.address+"|"+this.city+"|"+this.state+"|"+this.zip+" |"
+                +this.phone+"|"+this.school+"|"+this.height+"|"+this.weight+"|"+this.age+"|"+this.gender+"|"+this.handDominance+"|"
+                +this.legDominance+"|"+this.primarySport+"|"+this.primaryPosition;
+        return pdf;
+    }
     /**
      * Constructor of the Athlete class. 
      * 
