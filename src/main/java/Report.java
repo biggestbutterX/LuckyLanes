@@ -2,6 +2,7 @@
 package main.java;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class Report
     /**
      * This method handles the HTML class to generate the output files. 
      */
-    public void toDocs()
+    public void toDocs() throws IOException
     {
         System.out.println("Saving Documents");
         
@@ -82,6 +83,15 @@ public class Report
             YBalance ybOut=yBalance.get(i);
             ParQ parqOut=parQ.get(i);
 
+            //Collecting data to create pdf
+            String athString = athOut.toPDF();
+            String fmsString = fmsOut.toPDF();
+            String yBString = ybOut.toPDF();
+            String ftdString = ftdOut.toPDF();
+            String parqString = parqOut.toPDF();
+            String allPDF = athString+"|"+fmsString+"|"+yBString+"|"+ftdString+"|"+parqString;
+            dc.createPDF(allPDF);
+            
             html += athOut.toHTML();
             html += "<br><br><br><br>";
             html += fmsOut.toHTML();
